@@ -66,8 +66,10 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || "undefined";
-const serverUI = `
+const PORT = process.env.PORT || 3000;
+
+  app.listen(PORT, () => {    
+    const serverUI = `
 ╔═════════════════════╗
 ║                     ║
 ║     ${chalk.bold.green('ChatBP API')}      ║
@@ -75,13 +77,6 @@ const serverUI = `
 ╚═════════════════════╝
 ${chalk.bold.green('Running')}
 `;
+    console.log(serverUI);
+  });
 
-if (process.env.NODE_ENV === 'dev') {
-  app.listen(PORT, () => {    
-    console.log(serverUI);
-  });
-} else {
-  app.listen(() => {    
-    console.log(serverUI);
-  });
-}
