@@ -10,7 +10,7 @@ app.use(cors());
 
 config();
 
-app.use(express.json());
+// app.use(express.json());
 
 app.get('/api/models', async (res) => {
     const apiKey = process.env.API_KEY;
@@ -62,17 +62,22 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || "undefined";
+const serverUI = `
+╔═════════════════════╗
+║                     ║
+║     ${chalk.bold.green('ChatBP API')}      ║
+║                     ║
+╚═════════════════════╝
+${chalk.bold.green('Running')}
+`;
 
-    const serverUI = `
-      ╔═════════════════════╗
-      ║                     ║
-      ║     ${chalk.bold.green('ChatBP API')}      ║
-      ║                     ║
-      ╚═════════════════════╝
-        ${chalk.bold.green('Running on Port')} ${chalk.blue('3001')}
-    `;
-    
+if (process.env.NODE_ENV === 'dev') {
+  app.listen(PORT, () => {    
     console.log(serverUI);
-});
+  });
+} else {
+  app.listen(() => {    
+    console.log(serverUI);
+  });
+}
