@@ -10,7 +10,7 @@ app.use(cors());
 
 config();
 
-// app.use(express.json());
+app.use(express.json());
 
 app.get('/api/models', async (res) => {
     const apiKey = process.env.API_KEY;
