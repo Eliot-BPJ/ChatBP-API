@@ -12,11 +12,11 @@ config();
 
 app.use(express.json());
 
-app.get('/', (res) => {
-  res.json("Welcome to ChatBP API !")
-})
+app.get('/', (req, res) => {
+  res.json("Welcome to ChatBP API !");
+});
 
-app.get('/api/models', async (res) => {
+app.get('/api/models', async (req, res) => {
     const apiKey = process.env.API_KEY;
     const url = "https://api.openai.com/v1/models";
 
@@ -75,7 +75,7 @@ const PORT = process.env.PORT || 3000;
 ║     ${chalk.bold.green('ChatBP API')}      ║
 ║                     ║
 ╚═════════════════════╝
-${chalk.bold.green('Running')}
+${chalk.bold.green('Running on port')} ${chalk.bold.blue(PORT)}
 `;
     console.log(serverUI);
   });
