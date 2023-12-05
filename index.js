@@ -12,6 +12,10 @@ config();
 
 app.use(express.json());
 
+app.get('/', (res) => {
+  res.json("Welcome to ChatBP API !")
+})
+
 app.get('/api/models', async (res) => {
     const apiKey = process.env.API_KEY;
     const url = "https://api.openai.com/v1/models";
