@@ -59,7 +59,7 @@ app.post('/api/chat', async (req, res) => {
     });
 
     const data = await response.json();
-    console.log("Usage: ", data.usage);
+    console.log("Usage: ", data);
     res.json(data["choices"][0]["message"]["content"]);
   } catch (error) {
     res.json({ error: error.message });
