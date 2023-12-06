@@ -5,7 +5,6 @@ import { config } from 'dotenv';
 import cors from 'cors';
 
 const app = express();
-
 app.use(cors());
 
 config();
@@ -60,6 +59,10 @@ app.post('/api/chat', async (req, res) => {
 
     const data = await response.json();
     console.log("Usage: ", data);
+    res.header("Access-Control-Allow-Credentials", "true")
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version");
     res.json(data["choices"][0]["message"]["content"]);
   } catch (error) {
     res.json({ error: error.message });
